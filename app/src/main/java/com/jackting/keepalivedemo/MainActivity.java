@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 //        AccountHelper.autoSync();
 
         //JobScheduler拉活
-        MyJobService.startJob(this);
+//        MyJobService.startJob(this);
 
         //双进程拉活
 //        startService(new Intent(this, LocalService.class));

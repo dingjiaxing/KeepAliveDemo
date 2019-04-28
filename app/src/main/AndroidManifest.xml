@@ -77,6 +77,29 @@
             android:exported="true"
             android:process=":remote"
             />
+        <receiver android:name=".receiver.NormalSystemKeepAliveReceiver"
+            >
+            <intent-filter>
+                <!--
+                1. 8.0前，在测试过程中发现，进程在被 force stop 后，一段时间内是收不到广播的，受限较大
+                2. 8.0后取消了大部分静态注册的广播
+                3. 综上，低版本有一定效果，高版本效果不大，但从支付包manifest文件中来看使用了该方式配合其他方式使用
+                -->
+                <action android:name="android.intent.action.REBOOT"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <!--<action android:name="android.intent.action.PACKAGE_ADDED"/>-->
+                <!--<action android:name="android.intent.action.PACKAGE_REMOVED"/>-->
+                <!--支付宝注册的广播接收 start-->
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <!--支付宝注册的广播接收 end-->
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
