@@ -60,6 +60,23 @@
                 android:resource="@xml/account_auth"
                 />
         </service>
+
+        <service android:name=".service.LocalService"
+            android:exported="true"
+            />
+        <service android:name=".service.LocalService$InnerService"
+            android:exported="true"
+            />
+
+        <service android:name=".service.RemoteService"
+            android:exported="true"
+            android:process=":remote"
+            />
+
+        <service android:name=".service.RemoteService$InnerService"
+            android:exported="true"
+            android:process=":remote"
+            />
     </application>
 
 </manifest>

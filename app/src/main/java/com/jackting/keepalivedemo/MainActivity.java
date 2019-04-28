@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import com.jackting.keepalivedemo.account.AccountHelper;
 import com.jackting.keepalivedemo.service.ForegroundService;
+import com.jackting.keepalivedemo.service.LocalService;
 import com.jackting.keepalivedemo.service.MyJobService;
+import com.jackting.keepalivedemo.service.RemoteService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         //JobScheduler拉活
         MyJobService.startJob(this);
+
+        //双进程拉活
+//        startService(new Intent(this, LocalService.class));
+//        startService(new Intent(this, RemoteService.class));
     }
 
     @Override
