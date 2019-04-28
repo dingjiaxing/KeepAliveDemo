@@ -5,16 +5,15 @@
 
 
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"
-        android:maxSdkVersion="22"
         />
     <uses-permission android:name="android.permission.GET_ACCOUNTS"
-        android:maxSdkVersion="22"
         />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
     <uses-permission android:name="android.permission.BIND_JOB_SERVICE"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
 
     <application
         android:allowBackup="true"
@@ -51,7 +50,10 @@
                 android:resource="@xml/syncadapter"
                 />
         </service>
-        <service android:name=".account.AuthService" >
+        <service android:name=".account.AuthService"
+            android:enabled="true"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>
@@ -60,6 +62,12 @@
                 android:resource="@xml/account_auth"
                 />
         </service>
+        <provider
+            android:authorities="com.xx.daemon.provider"
+            android:name=".account.AccountProvider"
+            android:exported="false"
+            android:syncable="true"
+            />
 
         <service android:name=".service.LocalService"
             android:exported="true"
@@ -79,26 +87,26 @@
             />
         <receiver android:name=".receiver.NormalSystemKeepAliveReceiver"
             >
-            <intent-filter>
+            <!--<intent-filter>-->
                 <!--
                 1. 8.0前，在测试过程中发现，进程在被 force stop 后，一段时间内是收不到广播的，受限较大
                 2. 8.0后取消了大部分静态注册的广播
                 3. 综上，低版本有一定效果，高版本效果不大，但从支付包manifest文件中来看使用了该方式配合其他方式使用
                 -->
-                <action android:name="android.intent.action.REBOOT"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.SCREEN_ON"/>
-                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <!--<action android:name="android.intent.action.REBOOT"/>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+                <!--<action android:name="android.intent.action.SCREEN_ON"/>-->
+                <!--<action android:name="android.intent.action.SCREEN_OFF"/>-->
                 <!--<action android:name="android.intent.action.PACKAGE_ADDED"/>-->
                 <!--<action android:name="android.intent.action.PACKAGE_REMOVED"/>-->
                 <!--支付宝注册的广播接收 start-->
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+                <!--<action android:name="android.intent.action.USER_PRESENT"/>-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>-->
+                <!--<action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>-->
                 <!--支付宝注册的广播接收 end-->
-            </intent-filter>
+            <!--</intent-filter>-->
         </receiver>
     </application>
 

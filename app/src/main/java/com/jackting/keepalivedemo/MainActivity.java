@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 //        startService(new Intent(this,StickyService.class));
 
         //账户同步拉活
-//        AccountHelper.addAccount(this);
-//        AccountHelper.autoSync();
+        AccountHelper.addAccount(this);
+        AccountHelper.autoSync();
 
         //JobScheduler拉活
 //        MyJobService.startJob(this);

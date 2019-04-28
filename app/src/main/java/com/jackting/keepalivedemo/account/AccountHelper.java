@@ -29,7 +29,7 @@ public class AccountHelper {
     public static void autoSync(){
         Account account=new Account("xx",ACCOUNT_TYPE);
 
-        ContentResolver.setIsSyncable(account,"com.xx.provider",1);
+        ContentResolver.setIsSyncable(account,"com.xx.daemon.provider",1);
 
         ContentResolver.setSyncAutomatically(account,"com.xx.daemon.provider",true);
 
